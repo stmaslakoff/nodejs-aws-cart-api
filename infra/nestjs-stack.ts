@@ -4,14 +4,15 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import { NodejsFunction, NodejsFunctionProps } from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as path from 'path';
+import 'dotenv/config';
 
 export const getCommonHandlerProps = (): Partial<NodejsFunctionProps> => ({
   runtime: lambda.Runtime.NODEJS_22_X,
   handler: 'handler',
   tracing: lambda.Tracing.ACTIVE,
   bundling: {
-    minify: true,
-    sourceMap: true,
+    // minify: true,
+    // sourceMap: true,
     externalModules: [
       'class-transformer',
       'class-validator',
@@ -36,6 +37,14 @@ export class NestjsStack extends cdk.Stack {
       entry: path.join(__dirname, `${HANDLERS_FOLDER}/lambdaHandler.ts`),
       memorySize: 1024,
       timeout: cdk.Duration.seconds(30),
+      environment: {
+        NODE_ENV: process.env.NODE_ENV ?? 'development',
+        DB_HOST: process.env.DB_HOST ?? '',
+        DB_PORT: process.env.DB_PORT ?? '',
+        DB_USERNAME: process.env.DB_USERNAME ?? '',
+        DB_PASSWORD: process.env.DB_PASSWORD ?? '',
+        DB_DATABASE: process.env.DB_DATABASE ?? '',
+      },
     });
 
     const api = new apigateway.RestApi(this, 'CartAPI', {
