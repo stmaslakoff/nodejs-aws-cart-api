@@ -13,6 +13,7 @@ import {
   AuthService,
   // JwtAuthGuard,
   BasicAuthGuard,
+  // MockAuthGuard,
 } from './auth';
 import { User } from './users';
 import { AppRequest } from './shared';
@@ -45,7 +46,7 @@ export class AppController {
     return token;
   }
 
-  @UseGuards(BasicAuthGuard)
+  // @UseGuards(BasicAuthGuard)
   @Get('api/profile')
   async getProfile(@Request() req: AppRequest) {
     return {
