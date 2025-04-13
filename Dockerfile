@@ -1,11 +1,11 @@
 # Stage 1: Dependencies
-FROM node:18-alpine AS dependencies
+FROM node:22-alpine AS dependencies
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production
 
 # Stage 2: Builder
-FROM node:18-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 COPY tsconfig*.json ./
@@ -13,7 +13,7 @@ COPY src/ ./src/
 RUN npm ci && npm run build
 
 # Stage 3: Production
-FROM node:18-alpine AS production
+FROM node:22-alpine AS production
 WORKDIR /app
 
 # Add non-root user for security
