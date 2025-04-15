@@ -27,7 +27,7 @@ COPY package*.json ./
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV PORT=4000
 
 # Expose the port the app runs on
 EXPOSE ${PORT}
