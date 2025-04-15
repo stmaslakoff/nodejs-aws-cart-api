@@ -1,14 +1,17 @@
 branch-defaults:
-  main:
-    environment: prod
+  task-9:
+    environment: stmaslakoff-cart-api
     group_suffix: null
-
+environment-defaults:
+  stmaslakoff-cart-api-env:
+    branch: null
+    repository: null
 global:
-  application_name: ${GITHUB_USERNAME}-cart-api
+  application_name: stmaslakoff-cart-api
   branch: null
   default_ec2_keyname: null
-  default_platform: Docker
-  default_region: us-east-1
+  default_platform: Docker running on 64bit Amazon Linux 2
+  default_region: eu-central-1
   include_git_submodules: true
   instance_profile: null
   platform_name: null
